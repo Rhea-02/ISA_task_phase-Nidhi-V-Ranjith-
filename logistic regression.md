@@ -1,14 +1,14 @@
-**#####LOGISTIC REGRESSION#####**
+**##### LOGISTIC REGRESSION #####**
 
 Logistic regression is a classification algorithm used to assign observations to a discrete set of classes. Unlike linear regression which outputs continuous number values, logistic regression transforms its output using the logistic sigmoid function to return a probability value which can then be mapped to two or more discrete classes.
 
-**###Comparison to linear regression###**
+**### Comparison to linear regression ###**
 Given data on time spent studying and exam scores. Linear Regression and logistic regression can predict different things:
 
 * Linear Regression could help us predict the student’s test score on a scale of 0 - 100. Linear regression predictions are continuous (numbers in a range).
 * Logistic Regression could help use predict whether the student passed or failed. Logistic regression predictions are discrete (only specific values or categories are allowed). We can also view probability scores underlying the model’s classifications.
 
-**###Types of logistic regression###**
+**### Types of logistic regression ###**
 * Binary (Pass/Fail)
 * Multi (Cats, Dogs, Sheep)
 * Ordinal (Low, Medium, High)
@@ -23,7 +23,7 @@ Studied	Slept	Passed
 Graphically we could represent our data with a scatter plot.
 
 
-**###Sigmoid activation###**
+**### Sigmoid activation ###**
 In order to map predicted values to probabilities, we use the sigmoid function. The function maps any real value into another value between 0 and 1. In machine learning, we use sigmoid to map predictions to probabilities.
 
 **Math**
@@ -42,7 +42,7 @@ Graph
 def sigmoid(z):
   return 1.0 / (1 + np.exp(-z))
 
-**###Decision boundary###**
+**### Decision boundary ###**
 Our current prediction function returns a probability score between 0 and 1. In order to map this to a discrete class (true/false, cat/dog), we select a threshold value or tipping point above which we will classify values into class 1 and below which we classify values into class 2.
 
 p≥0.5,class=1p<0.5,class=0
@@ -55,7 +55,7 @@ Using our knowledge of sigmoid functions and decision boundaries, we can now wri
 
 **Math**
 
-L
+
 
 z=W0+W1Studied+W2Slept
 We will transform the output using the sigmoid function to return a probability value between 0 and 1.
@@ -73,7 +73,7 @@ def predict(features, weights):
   z = np.dot(features, weights)
   return sigmoid(z)
 
-**###Cost function###**
+**### Cost function ###**
 The cost function in linear regression can not be used here.If you do so ,you would end up with a non-convex function: a weirdly-shaped graph with no easy way to find minimum global point.
 
 **Math**
@@ -90,7 +90,7 @@ The key thing to note is the cost function penalizes confident and wrong predict
 
 Multiplying by y and (1−y) in the above equation is a sneaky trick that let’s us use the same equation to solve for both y=1 and y=0 cases. If y=0, the first side cancels out. If y=1, the second side cancels out. In both cases we only perform the operation we need to perform.
 
-**###Vectorized cost function###**
+**### Vectorized cost function ###**
 
 def cost_function(features, labels, weights):
     '''
@@ -120,7 +120,7 @@ def cost_function(features, labels, weights):
 
     return cost
 
-**###Gradient descent###**
+**### Gradient descent ###**
 To minimize our cost, we use Gradient Descent just like before in Linear Regression. There are other more sophisticated optimization algorithms out there such as conjugate gradient like BFGS too. Machine learning libraries like Scikit-learn hide their implementations so you can focus on other areas.
 
 **Math**
@@ -219,7 +219,7 @@ def train(features, labels, weights, lr, iters):
 
     return weights, cost_history
 
-**###Model evaluation###**
+**### Model evaluation ###**
 If our model is working, we should see our cost decrease after every iteration.
 
 iter: 0 cost: 0.635
@@ -229,7 +229,7 @@ Final cost: 0.2487. Final weights: [-8.197, .921, .738]
 Cost history
 
 
-**###Accuracy###**
+**### Accuracy ###**
 
 Accuracy measures how correct our predictions were. In this case we simply compare predicted labels to true labels and divide by the total.
 
@@ -260,7 +260,7 @@ def plot_decision_boundary(trues, falses):
     plt.axhline(.5, color='black')
     plt.show()
 
-**###Multiclass logistic regression###**
+**### Multiclass logistic regression ###**
 Instead of y=0,1 we will expand our definition so that y=0,1...n. Basically we re-run binary classification multiple times, once for each class.
 
 **Procedure**
