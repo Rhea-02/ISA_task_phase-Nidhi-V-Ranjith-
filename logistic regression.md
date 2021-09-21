@@ -1,14 +1,14 @@
-**### LOGISTIC REGRESSION**
+ LOGISTIC REGRESSION 
 
 Logistic regression is a classification algorithm used to assign observations to a discrete set of classes. Unlike linear regression which outputs continuous number values, logistic regression transforms its output using the logistic sigmoid function to return a probability value which can then be mapped to two or more discrete classes.
 
-**### Comparison to linear regression ###**
+**Comparison to linear regression**
 Given data on time spent studying and exam scores. Linear Regression and logistic regression can predict different things:
 
 * Linear Regression could help us predict the student’s test score on a scale of 0 - 100. Linear regression predictions are continuous (numbers in a range).
 * Logistic Regression could help use predict whether the student passed or failed. Logistic regression predictions are discrete (only specific values or categories are allowed). We can also view probability scores underlying the model’s classifications.
 
-**##### Types of logistic regression**
+**Types of logistic regression**
 * Binary (Pass/Fail)
 * Multi (Cats, Dogs, Sheep)
 * Ordinal (Low, Medium, High)
@@ -23,7 +23,7 @@ Studied	Slept	Passed
 Graphically we could represent our data with a scatter plot.
 
 
-**##### Sigmoid activation**
+**Sigmoid activation**
 In order to map predicted values to probabilities, we use the sigmoid function. The function maps any real value into another value between 0 and 1. In machine learning, we use sigmoid to map predictions to probabilities.
 
 **Math**
@@ -73,7 +73,7 @@ def predict(features, weights):
   z = np.dot(features, weights)
   return sigmoid(z)
 
-**#####Cost function**
+**##### Cost function **
 The cost function in linear regression can not be used here.If you do so ,you would end up with a non-convex function: a weirdly-shaped graph with no easy way to find minimum global point.
 
 **Math**
@@ -90,7 +90,7 @@ The key thing to note is the cost function penalizes confident and wrong predict
 
 Multiplying by y and (1−y) in the above equation is a sneaky trick that let’s us use the same equation to solve for both y=1 and y=0 cases. If y=0, the first side cancels out. If y=1, the second side cancels out. In both cases we only perform the operation we need to perform.
 
-**#####Vectorized cost function**
+**Vectorized cost function**
 
 def cost_function(features, labels, weights):
     '''
@@ -120,7 +120,7 @@ def cost_function(features, labels, weights):
 
     return cost
 
-**#####Gradient descent**
+**Gradient descent**
 To minimize our cost, we use Gradient Descent just like before in Linear Regression. There are other more sophisticated optimization algorithms out there such as conjugate gradient like BFGS too. Machine learning libraries like Scikit-learn hide their implementations so you can focus on other areas.
 
 **Math**
@@ -219,7 +219,7 @@ def train(features, labels, weights, lr, iters):
 
     return weights, cost_history
 
-**##### Model evaluation**
+ Model evaluation
 If our model is working, we should see our cost decrease after every iteration.
 
 iter: 0 cost: 0.635
@@ -229,7 +229,7 @@ Final cost: 0.2487. Final weights: [-8.197, .921, .738]
 Cost history
 
 
-**#####Accuracy**
+ Accuracy 
 
 Accuracy measures how correct our predictions were. In this case we simply compare predicted labels to true labels and divide by the total.
 
@@ -260,7 +260,7 @@ def plot_decision_boundary(trues, falses):
     plt.axhline(.5, color='black')
     plt.show()
 
-**##### Multiclass logistic regression**
+ Multiclass logistic regression
 Instead of y=0,1 we will expand our definition so that y=0,1...n. Basically we re-run binary classification multiple times, once for each class.
 
 **Procedure**
@@ -273,6 +273,6 @@ For each class…
 **Softmax activation**
 The softmax function (softargmax or normalized exponential function) is a function that takes as input a vector of K real numbers, and normalizes it into a probability distribution consisting of K probabilities proportional to the exponentials of the input numbers. That is, prior to applying softmax, some vector components could be negative, or greater than one; and might not sum to 1; but after applying softmax, each component will be in the interval [ 0 , 1 ] , and the components will add up to 1, so that they can be interpreted as probabilities. The standard (unit) softmax function is defined by the formula
 
-**σ(zi)=ez(i)∑Kj=1ez(j)   for i=1,.,.,.,K and z=z1,.,.,.,zK **
+**σ(zi)=ez(i)∑Kj=1ez(j)   for i=1,.,.,.,K and z=z1,.,.,.,zK**
 
 In words: we apply the standard exponential function to each element zi of the input vector z and normalize these values by dividing by the sum of all these exponentials; this normalization ensures that the sum of the components of the output vector σ(z) is 1.
